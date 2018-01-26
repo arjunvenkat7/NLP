@@ -1,0 +1,33 @@
+NLP a beginner’s journey
+I am following the blog https://machinelearningmastery.com/crash-course-deep-learning-natural-language-processing/ which seems to be interesting. I am condensing the content and I am including my experience as well along with the code.
+Cleaning Text Data
+First step in any NLP application would be cleaning up the data. Text will be split into words and we need effort to fix the common issues like
+•	Upper case, Lower Case characters 
+•	Punctuations 
+•	Numbers for e.g. values, dates 
+•	Spelling mistakes
+•	Unicode characters
+•	Symbols 
+These are the commonly encountered issues which we need to fix before handling the data.
+Manual tokenization 
+The process in which we convert the raw text into words or some format for the model is called tokenization. We can create our own tokenizer using python
+For example the steps which we could follow is load a file, split the sentences into words based on the white spaces. Next step would be converting everything to lower case. This script can be extended to handle Unicode characters and punctuations. This could be a good starting point.
+Using NLTK
+We can use the existing library for tokenisation. The python library is Natural Language Tool Kit or also known as NLTK in short. Install the library by using sudo pip command. For further instructions about the library, access the link: http://www.nltk.org .
+Task to be done
+Locate a free classical book on the Project Gutenberg website, download the ASCII version of the book and tokenize the text and save the result to a new file.
+I did tokenise a book and also tokenised a document on my own. The manual tokenizer which we implemented just focuses on the spaces and creates the tokens since we have used text.split() method. Whereas the tokenizer present in nltk.tokenise, identifies special characters such as commas, dots etc and considers them as a separate token. Hence the number of tokens generated is indeed higher than the manual tokens. Task specified is completed. 
+For information about the code look onto –
+Bag-of-Words Model
+The bag-of-words model is a way of representing text data when modelling text with machine learning algorithms.
+So what it basically does? It looks onto the occurrence of words in a document. The infrequent words are neglected and the frequent ones are considered and given a score. A vector is created and the information is stored.  No information about the order or structure of the words is stored. Basically it is concerned about the occurrence of the words rather than its position.
+There are lot of information around which you can use to understand how exactly Bag of Words algorithm works. 
+This will be a good starting point for Bag-Of-Words: https://machinelearningmastery.com/gentle-introduction-bag-words-model/
+I will just paraphrase what I understood, we cannot feed raw text to our machine learning model for understanding. So what we can do is clean up the data first then apply the bag of words algorithms. So first tokenisation of the raw text is done once we are done with the cleaning. Then we find out the occurrence of the words in the documents and give the details about how frequent the words appear. Then we perform hashing to store the information, by which we effectively convert raw data into vectors which can be used by the machine. One problem here is the size of the hash so there will be a trade off always. Another possible issue is the insignificant words such as “the”, “a” which might take higher precedence over the other interesting words, since they appear a lot of times. So we have to fix this issue as well. We can manage the size of the vocabulary which we generate by ignoring case, by ignoring punctuations, by ignoring few misspelled words and ignoring the insignificant words which appear frequently in our document such as “the”. We can also handle the size by creating grams such as bigram or trigram words. In general N-gram refers to sequence of words formed by N tokens. For example bi-gram is formed by 2 tokens. E.g. “Please wear”, ”wear headphones”, “headphones for”, “for personal” etc. The sentence would be Please wear headphones for personal use. Bag of Bigrams perform better than Bag of Words.
+For additional information please access the above specified link.
+For the specified task, I created my own data set based on the different versions of the tongue twister “Betty botter”. I used both Keras and Scikit Learn methods to perform the tokenise operations and implement bag of words algorithm.
+My data set consists of three files with three different versions of the same tongue twister. I read the files one after the other and store them as strings. Then perform the tokenise operation on them. In case of Keras approach, after data is read tokeniser class is used.  Then perform fit_on_texts method on the data. Then obtain the results for word count, document count and finally encode the contents. So encoded matrix obtained. The code is present in the –
+The same process is done using scikit learn feature extractor and vectorizer. Then vectorizer.fit is used on the contents. Finally we can obtain the vectorized results of our data. The code is present in –
+
+Word Embedding Representation
+Will be updated…..
